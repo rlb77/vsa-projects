@@ -17,5 +17,17 @@ x = ((100-User_Age)+2017)
 BD = raw_input("Have you had your birthday this year?:  ")
 y = x
 if (BD == "no"): y = x - 1
-print "You will be 100 in", y
-if User_Age < 17:
+if User_Age >= 100:
+    print "you turned 100 in", y
+else:
+    print "You will be 100 in", y
+if User_Age > 16:
+    print "You can watch G, PG, PG-13, and R movies"
+elif User_Age > 12:
+    print "You can watch G, PG, and PG-13 movies"
+elif User_Age < 13:
+    parent = raw_input("Do you have a parent with you?:  ")
+    if (parent == "no"):
+        print "You can watch G movies"
+    else:
+        print "You can watch G and PG movies"
