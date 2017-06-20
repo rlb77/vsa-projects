@@ -12,4 +12,30 @@ Keep track of how many guesses the user has taken, and when the game ends, print
 
 """
 
-
+var3 = 'yes'
+while var3 == 'yes':
+    import random
+    var = random.randint(1,25)
+    y = int(raw_input("How many guesses would you like to have?"))
+    x = int(raw_input("Guess a number between 1 and 25"))
+    var2 = 6-y
+    while x != var:
+        if x != 'exit':
+            x = int(x)
+            if x > var:
+                x = raw_input("Too high.  Guess again")
+            elif x < var:
+                x = raw_input("Too low.  Guess again")
+            elif x == 'exit':
+                x = var
+                print "Game over.  The answer is", var
+            if x == var:
+                 print "Correct.  The answer is", var
+        elif var2 == 5:
+            if x == var:
+                print 'Correct. The answer is', var
+            else:
+                x = var
+                print "Game over. The answer is", var
+        var2 = var2 + 1
+    var3 = raw_input("Would you like to play again?")
