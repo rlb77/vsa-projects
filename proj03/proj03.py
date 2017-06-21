@@ -20,22 +20,23 @@ while var3 == 'yes':
     x = int(raw_input("Guess a number between 1 and 25"))
     var2 = 6-y
     while x != var:
-        if x != 'exit':
+        var2 = var2 + 1
+        if x != "exit":
             x = int(x)
-            if x > var:
-                x = raw_input("Too high.  Guess again")
-            elif x < var:
-                x = raw_input("Too low.  Guess again")
-            elif x == 'exit':
-                x = var
-                print "Game over.  The answer is", var
-            if x == var:
-                 print "Correct.  The answer is", var
-        elif var2 == 5:
+        if var2 == 6:
             if x == var:
                 print 'Correct. The answer is', var
             else:
                 x = var
                 print "Game over. The answer is", var
-        var2 = var2 + 1
+        elif x > var:
+             x = raw_input("Too high.  Guess again")
+        elif x < var:
+            x = raw_input("Too low.  Guess again")
+        elif x == var:
+            print "Correct.  The answer is", var
+        if x == 'exit':
+            print "Game over. The answer is", var
+            x = var
+
     var3 = raw_input("Would you like to play again?")

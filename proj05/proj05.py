@@ -44,9 +44,7 @@ def intersection(lst1, lst2):
     :param lst2: list, any type
     :return: list, any type
     """
-    lst1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    lst2 = [1, 2, 4, 5, 7, 8, 9, 11, 13]
-    if var in lst1:
+    return []
 c = intersection(1, 1)
 print c
 
@@ -114,13 +112,10 @@ def is_right(side1, side2, side3):
     :param side3: int or float
     :return: bool
     """
-    list = [side1, side2, side3]
-    list.sort()
-    if (list[0] ** 2) + (list[1] ** 2) == (list[2] ** 2):
-        return True
-    else:
-        return False
-
+    x = find_ab(side1, side2, side3)
+    y = find_c(side1, side2, side3)
+    z = pythagorean(x[0], x[1], y)
+    return z
 c = is_right(8, 10, 6)
 print c
 
