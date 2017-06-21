@@ -11,7 +11,15 @@ def divisors(num):
     :param num: int
     :return: list (int)
     """
-    return 0
+    list = []
+    x = 0
+    for var in range(0, num):
+        x = x + 1
+        if num % x == 0:
+            list.append(x)
+    return list
+c = divisors(10)
+print c
 
 def prime(num):
     """
@@ -19,8 +27,14 @@ def prime(num):
     :param num: int
     :return: bool
     """
-    return False
-
+    list = divisors(num)
+    list = list[2:]
+    if list != []:
+        return False
+    else:
+        return True
+c = prime(5)
+print c
 # Part II
 
 def intersection(lst1, lst2):
@@ -30,9 +44,16 @@ def intersection(lst1, lst2):
     :param lst2: list, any type
     :return: list, any type
     """
-    return ["test"]
+    lst1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    lst2 = [1, 2, 4, 5, 7, 8, 9, 11, 13]
+    if var in lst1:
+c = intersection(1, 1)
+print c
 
-# Part III
+
+
+
+# # Part III
 
 def find_ab(side1, side2, side3):
     """
@@ -42,7 +63,11 @@ def find_ab(side1, side2, side3):
     :param side3: int or float
     :return: list of 2 ints or floats
     """
-    return [0, 0]
+    list = [side1, side2, side3]
+    list.sort()
+    return list[0:2]
+c = find_ab(3, 4, 5)
+print c
 
 def find_c(side1, side2, side3):
     """
@@ -52,7 +77,12 @@ def find_c(side1, side2, side3):
     :param side3: int or float
     :return: int or float
     """
-    return 0
+    list = [side1, side2, side3]
+    list.sort()
+    return list[-1]
+c = find_c(3, 4, 5)
+print c
+
 
 def square(side):
     """
@@ -60,7 +90,9 @@ def square(side):
     :param side: int or float
     :return: int or float
     """
-    return 0
+    return side * side
+c = square(5)
+print c
 
 def pythagorean(a,b,c):
     """
@@ -70,7 +102,9 @@ def pythagorean(a,b,c):
     :param c: int or float
     :return: bool
     """
-    return False
+    return a**2 + b**2 == c**2
+c = pythagorean(3, 4, 5)
+print c
 
 def is_right(side1, side2, side3):
     """
@@ -80,7 +114,15 @@ def is_right(side1, side2, side3):
     :param side3: int or float
     :return: bool
     """
-    return False
+    list = [side1, side2, side3]
+    list.sort()
+    if (list[0] ** 2) + (list[1] ** 2) == (list[2] ** 2):
+        return True
+    else:
+        return False
+
+c = is_right(8, 10, 6)
+print c
 
 # TESTS
 # Feel free to add your own tests as needed!
