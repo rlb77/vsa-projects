@@ -77,6 +77,57 @@ def get_word_score(word, n):
     returns: int >= 0
     """
     # TO DO...
+
+    x = 0
+    points = 0
+    list = []
+
+    for var in word:
+        list.append(SCRABBLE_LETTER_VALUES[var])
+    for var in word:
+        points = points + list[x]
+        x = x + 1
+    points = points * len(word)
+    if n == len(word):
+        points = points + 50
+    print "the points for this word is ", points
+    return points
+
+
+
+answer = get_word_score("matthew", HAND_SIZE)
+print answer
+
+
+
+
+
+    # word = "cab"
+    # x = 0
+    # list = []
+    # for var in word:
+    #     list.append(SCRABBLE_LETTER_VALUES[var])
+    # print list
+    # for var in word:
+    #     number = number + list[x]
+    #     x = x + 1
+    # number = number * len(word)
+    # print number
+
+
+
+
+
+
+
+
+
+
+        #if letters in SCRABBLE_LETTER_VALUES:
+            #print word
+
+
+
     
 #
 # Make sure you understand how this function works and what it does!
