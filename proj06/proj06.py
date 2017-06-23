@@ -58,16 +58,25 @@ word_in_list = []
 word = choose_word(wordlist)
 for letter in word:
     word_in_list.append(letter)
-print word_in_list
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 guesses = 0
 wordlength = int(len(word_in_list))
 alphabetlength = int(len(alphabet))
 y = 0
 z = 0
+b = 0
 final_word_reveal = []
 var3 = 0
 var4 = 0
+list = []
+list1 = []
+for letter in word_in_list:
+    list.append(letter)
+for letter in word_in_list:
+    list1.append(letter)
+for var in range(len(word_in_list)):
+    list[b] = '_'
+    b = b + 1
 while word_in_list != []:
     guess_letter = raw_input('Guess a letter')
     for var in range(wordlength):
@@ -77,8 +86,6 @@ while word_in_list != []:
             final_word_reveal.append(str(guess_letter))
         else:
             y = y + 1
-        if word_in_list == []:
-            print
     if var3 == 1:
         guesses = guesses - 1
         var3 = 0
@@ -89,7 +96,6 @@ while word_in_list != []:
         else:
             z = z + 1
     if guesses == 7:
-        print
         var4 = 1
         word_in_list = []
     guesses = guesses + 1
@@ -99,55 +105,16 @@ while word_in_list != []:
     alphabetlength = int(len(alphabet))
     if word_in_list != []:
         print "Available letters: " + str(alphabet)
-        print word_in_list
         print "You have", 8 - guesses, "guesses left."
     if word_in_list == []:
         if var4 == 0:
             print "You win"
         if var4 == 1:
-            print "You lose"
+            print "You lose.  The word is", word
+    c = 0
+    for var5 in range(len(list)):
+        if guess_letter == list1[c]:
+            list[c] = list1[c]
+        c = c + 1
+    print list
 
-            # word = 'dogg'
-            # list = []
-            # list1 = []
-            # for letter in word:
-            #     list.append(letter)
-            # for letter in word:
-            #     list1.append(letter)
-            # print list, list1
-            #
-            # listlength = len(list)
-            # print listlength
-            #
-            # letter = raw_input('enter a letter')
-            #
-            # y = 0
-            # x = 0
-            #
-            # for var in range(listlength):
-            #     list[x] = '_'
-            #     x = x + 1
-            #
-            # print list, list1
-            #
-            # for var2 in range(listlength):
-            #     if letter == list1[y]:
-            #         list[y] = list1[y]
-            #     y = y + 1
-            # print list
-            #
-            # letter = raw_input('enter a letter')
-            # y = 0
-            # for var2 in range(listlength):
-            #     if letter == list1[y]:
-            #         list[y] = list1[y]
-            #     y = y + 1
-            # print list
-            # y = 0
-            # letter = raw_input('enter a letter')
-            #
-            # for var2 in range(listlength):
-            #     if letter == list1[y]:
-            #         list[y] = list1[y]
-            #     y = y + 1
-            # print list
