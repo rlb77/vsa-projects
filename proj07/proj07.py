@@ -9,7 +9,7 @@ import string
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
-
+score = 0
 SCRABBLE_LETTER_VALUES = {
     'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k':
         5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u':
@@ -90,29 +90,11 @@ def get_word_score(word, n):
     points = points * len(word)
     if n == len(word):
         points = points + 50
-    print "the points for this word is ", points
+    print "the reward for your greatness thus far is ",points
     return points
 
 
 
-answer = get_word_score("matthew", HAND_SIZE)
-print answer
-
-
-
-
-
-    # word = "cab"
-    # x = 0
-    # list = []
-    # for var in word:
-    #     list.append(SCRABBLE_LETTER_VALUES[var])
-    # print list
-    # for var in word:
-    #     number = number + list[x]
-    #     x = x + 1
-    # number = number * len(word)
-    # print number
 
 
 
@@ -123,8 +105,13 @@ print answer
 
 
 
-        #if letters in SCRABBLE_LETTER_VALUES:
-            #print word
+
+
+
+
+
+
+
 
 
 
@@ -143,7 +130,15 @@ def display_hand(hand):
     The order of the letters is unimportant.
 
     hand: dictionary (string -> int)
+
+
     """
+
+
+
+
+
+
     for letter in hand.keys():
         for j in range(hand[letter]):
              print letter,              # print all on the same line
@@ -198,6 +193,23 @@ def update_hand(hand, word):
     """
     # TO DO ...
 
+    handcopy = hand.copy()
+    for key in word:
+       handcopy[key] = handcopy[key] - 1
+    return handcopy
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 # Problem #3: Test word validity
 #
@@ -213,11 +225,46 @@ def is_valid_word(word, hand, word_list):
     """
     # TO DO...
 
+    handcopy = hand.copy()
+
+    if word not in word_list:
+        return False
+
+
+    for key in word:
+        handcopy[key] = handcopy.get(key,0) - 1
+        if handcopy[key] < 0:
+            return False
+
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def calculate_handlen(hand):
     handlen = 0
     for v in hand.values():
         handlen += v
     return handlen
+
+
+
+
+
+
 
 #
 # Problem #4: Playing a hand
@@ -228,7 +275,7 @@ def play_hand(hand, word_list):
     Allows the user to play the given hand, as follows:
 
     * The hand is displayed.
-    
+
     * The user may input a word.
 
     * An invalid word is rejected, and a message is displayed asking
@@ -251,8 +298,37 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
+    gws = 0
+    score = 0
 
-#
+
+
+    while calculate_handlen(hand) > 0:
+        display_hand(hand)
+
+        word=raw_input(str("Enter a word, please! :3 I'm excited to see what you've thought of!")).lower()
+
+        vw= is_valid_word(word, hand, word_list)
+        if word == '.':
+            print "The tally of your struggles here is", score
+            break
+        elif vw==False:
+            print ("You shall not pass! Aw... honestly I have to say I'm disappointed in you. You should know that that isn't a word...")
+
+        else:
+            gws= get_word_score(word, HAND_SIZE)
+            print "You have", gws + score,"points. I'M SO PROUD OF YOU! :D"
+            hand = update_hand(hand, word)
+            score = score + gws
+
+
+
+
+
+
+
+
+
 # Problem #5: Playing a game
 # Make sure you understand how this code works!
 # 
@@ -272,10 +348,44 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
+    # hand = deal_hand(HAND_SIZE)
+    hand = deal_hand(HAND_SIZE)
+    lasthand = hand
+    score = play_hand(hand, word_list)
+    x = 0
 
-#
+    while x==0:
+
+
+        question=raw_input(str("Please enter n to play a new hand, enter r to repeat your last hand, or type e to exit your adventure that you have traveled through so far.")).lower()
+
+
+        if question == 'n':
+            hand = deal_hand(HAND_SIZE)
+            lasthand = hand
+        elif question=='r':
+            # hand=lasthand
+            print "hopefully we just redefined the hand"
+        elif question=='e':
+            print ''
+            exit()
+        else:
+            print 'LISTEN! You have to enter an actual command!'
+        score = play_hand(hand, word_list)
+
+
+
+
+
+
 # Build data structures used for entire session and play game
 #
-if __name__ == '__main__':
-    word_list = load_words()
-    play_game(word_list)
+# if __name__ == '__main__':
+#     word_list = load_words()
+#     play_game(word_list)
+
+
+
+
+word_list = load_words()
+play_game(word_list)
