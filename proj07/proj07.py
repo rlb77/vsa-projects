@@ -310,10 +310,10 @@ def play_hand(hand, word_list):
 
         vw= is_valid_word(word, hand, word_list)
         if word == '.':
-            print "The tally of your struggles here is", score
+            print "The tally of the reward for your struggle here is", score
             break
         elif vw==False:
-            print ("You shall not pass! Aw... honestly I have to say I'm disappointed in you. You should know that that isn't a word...")
+            print ("You shall not pass! Aw... honestly I have to say I'm disappointed in you. You should know that that won't work...")
 
         else:
             gws= get_word_score(word, HAND_SIZE)
@@ -362,16 +362,15 @@ def play_game(word_list):
 
         if question == 'n':
             hand = deal_hand(HAND_SIZE)
-            lasthand = hand
+            score = play_hand(hand, word_list)
         elif question=='r':
-            # hand=lasthand
-            print "hopefully we just redefined the hand"
+            score = play_hand(hand, word_list)
         elif question=='e':
             print ''
             exit()
         else:
             print 'LISTEN! You have to enter an actual command!'
-        score = play_hand(hand, word_list)
+
 
 
 
