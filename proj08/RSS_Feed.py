@@ -117,16 +117,43 @@ class SummaryTrigger(wordtrigger):
 # Problems 6-8
 
 # TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, Trigger):
+        self.Trigger=Trigger
+    def evaluate(self, story):
+        return not self.Trigger.evaluate(story)
 
 # TODO: AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self, Trigger, Trigger2):
+        self.Trigger = Trigger
+        self.Trigger2 = Trigger2
+    def evaluate(self, story):
+        return self.Trigger.evaluate(story) and self.Trigger2.evaluate(story)
 
 # TODO: OrTrigger
-
+class OrTrigger(Trigger):
+    def __init__(self, Trigger, Trigger2):
+        self.Trigger = Trigger
+        self.Trigger2 = Trigger2
+    def evaluate(self, story):
+        return self.Trigger.evaluate(story) or self.Trigger2.evaluate(story)
 
 # Phrase Trigger
 # Question 9
 
 # TODO: PhraseTrigger
+class PhraseTrigger(Trigger):
+    def __init__(self, phrase):
+        self.phrase = phrase
+
+
+    def evaluate(self, story):
+        if self.phrase in story.get_subject() or self.phrase in story.get_title() or self.phrase in story.get_summary():
+            return True
+        else:
+            return False
+
 
 
 #======================
@@ -143,7 +170,13 @@ def filter_stories(stories, triggerlist):
     # TODO: Problem 10
     # This is a placeholder (we're just returning all the stories, with no filtering) 
     # Feel free to change this line!
-    return stories
+    list = []
+    for story in stories:
+        for trigger in triggerlist:
+            if trigger.evaluate(story) == True:
+                list.append(story)
+    return list
+
 
 #======================
 # Extensions: Part 4
@@ -178,8 +211,8 @@ def main_thread(p):
     # A sample trigger list - you'll replace
     # this with something more configurable in Problem 11
     t1 = SubjectTrigger("Trump")
-    t2 = SummaryTrigger("Vanderbilt")
-    t3 = PhraseTrigger("Net Neutrality")
+    t2 = SummaryTrigger("Trump")
+    t3 = PhraseTrigger("Trump")
     t4 = OrTrigger(t2, t3)
     triggerlist = [t1, t4]
     
@@ -213,7 +246,7 @@ def main_thread(p):
         print "Sleeping..."
         time.sleep(SLEEPTIME)
 
-SLEEPTIME = 60 #seconds -- how often we poll
+SLEEPTIME = 10 #seconds -- how often we poll
 if __name__ == '__main__':
     p = Popup()
     thread.start_new_thread(main_thread, (p,))
