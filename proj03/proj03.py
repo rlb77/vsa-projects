@@ -25,18 +25,18 @@ while var3 == 'yes':
             x = int(x)
         if var2 == 6:
             if x == var:
-                print 'Correct. The answer is', var
+                print 'Correct.'
             else:
                 x = var
-                print "Game over. The answer is", var
+                print "Game over."
         elif x > var:
              x = raw_input("Too high.  Guess again")
         elif x < var:
             x = raw_input("Too low.  Guess again")
         elif x == var:
-            print "Correct.  The answer is", var
+            print "Correct."
         if x == 'exit':
-            print "Game over. The answer is", var
+            print "Game over."
             x = var
-
-    var3 = raw_input("Would you like to play again?")
+    print 'The answer is', var
+    var3 = raw_input("Would you like to play again?").lower()
